@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot SINGERS</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div id="chatbox">
+            <p class="bot-text"><span>Bonjour ! Je suis le chatbot de SINGERS. Posez-moi vos questions 😊</span></p>
+        </div>
+        <input type="text" id="userInput" placeholder="Tapez votre message..." autofocus>
+        <button onclick="sendMessage()">Envoyer</button>
+    </div>
+
+    <script>
+        function sendMessage() {
+            let userText = document.getElementById("userInput").value;
+            if (!userText.trim()) return;
+
+            let chatbox = document.getElementById("chatbox");
+            chatbox.innerHTML += `<p class="user-text"><span>${userText}</span></p>`;
+            document.getElementById("userInput").value = "";
+
+            fetch("/get", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: `msg=${encodeURIComponent(userText)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                chatbox.innerHTML += `<p class="bot-text"><span>${data.response}</span></p>`;
+                chatbox.scrollTop = chatbox.scrollHeight;
+            });
+        }
+
+        document.getElementById("userInput").addEventListener("keypress", function (e) {
+            if (e.key === "Enter") sendMessage();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+chatbot/
+
+__pycache__/
+*.py[cod]
+
+.env
+.vscode/
