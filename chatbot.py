@@ -14,7 +14,7 @@ site_content = load_or_scrape_site()
 def get_bot_response(user_input):
     try:
         prompt = f"""
-Tu es un assistant pour l'entreprise Box Records. Voici des informations extraites de leur site web : {site_content}
+Tu es un assistant web pour une entreprise dont voici les informations extraites de leur site web : {site_content}
 Réponds de manière claire, professionnelle et concise à la question suivante :
 
 Question : {user_input}
