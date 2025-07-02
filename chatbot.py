@@ -1,17 +1,20 @@
 #%%
 import google.generativeai as genai
 import os
+from scrap import load_or_scrape_site
+
 
 # Config API
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 model = genai.GenerativeModel('models/gemini-1.5-flash')
 
+site_content = load_or_scrape_site()
+
 def get_bot_response(user_input):
     try:
         prompt = f"""
-Tu es un assistant intelligent pour SINGERS, une entreprise spécialisée dans l'événementiel.
-Elle a été fondée en 2015 par A et B, et organise des événements comme des concerts, des mariages, et des soirées privées.
+Tu es un assistant pour l'entreprise Box Records. Voici des informations extraites de leur site web : {site_content}
 Réponds de manière claire, professionnelle et concise à la question suivante :
 
 Question : {user_input}
@@ -22,3 +25,5 @@ Question : {user_input}
     except Exception as e:
         print("Erreur Gemini :", e)  # ← ceci va afficher le vrai problème dans le terminal
         return "Je suis désolé, une erreur est survenue avec l'IA."
+
+# %%
