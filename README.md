@@ -1,11 +1,9 @@
 # Chatbot_AI_for_company
 
 1) Install the requirement
-pip install requirement.py 
+pip install requirements.txt
 
-2) Put your API key
-
-3) Put the company website URL 
+2) Put your API key and the company website URL in your env file
 
 4) RUN scrap.py and save the file 
 
